@@ -21,8 +21,8 @@ class Solution:
     '''
     def reverseGroup(self, head: ListNode, tail: ListNode):
         tailNext = tail.next
-        pre = head
-        cur = head.next
+        pre = head.next
+        cur = pre.next
         while cur != tailNext:
             temp = cur.next
             cur.next = pre
@@ -50,7 +50,6 @@ class Solution:
             while i:
                 cur = cur.next
                 i -= 1
-        return dummy.next
 
 
 if __name__ == "__main__":
