@@ -1,5 +1,7 @@
-from typing import List
 import heapq
+from typing import List
+
+
 # Definition for singly-linked list.
 
 
@@ -21,7 +23,7 @@ class Solution:
             result.append(head.next)
         return result
 
-    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode or bool:
         if not lists or len(lists) == 0:
             return None
         head = ListNode()
@@ -40,7 +42,7 @@ class Solution:
                 lists.pop(0)
         return head.next
 
-    def useHeap(self, lists: List[ListNode]) -> ListNode:
+    def useHeap(self, lists: List[ListNode]) -> ListNode or bool:
         if not lists or not len(lists):
             return None
         heap = []
@@ -49,7 +51,7 @@ class Solution:
                 heapq.heappush(heap, node.val)
                 node = node.next
 
-        dummy = ListNode(None)
+        dummy = ListNode(0)
         cur = dummy
         while heap:
             tempNode = ListNode(heapq.heappop(heap))
@@ -57,7 +59,7 @@ class Solution:
             cur = cur.next
         return dummy.next
 
-    def divide_and_conquer(self, lists: List[ListNode]) -> ListNode:
+    def divide_and_conquer(self, lists: List[ListNode]) -> ListNode or bool:
         length = len(lists)
 
         # 边界情况
@@ -71,7 +73,7 @@ class Solution:
         return self.merge(self.mergeKLists(lists[:mid]), self.mergeKLists(lists[mid:length]))
 
     def merge(self, node_a, node_b):
-        dummy = ListNode(None)
+        dummy = ListNode(0)
         cursor_a, cursor_b, cursor_res = node_a, node_b, dummy
         while cursor_a and cursor_b:  # 对两个节点的 val 进行判断，直到一方的 next 为空
             if cursor_a.val <= cursor_b.val:
