@@ -10,7 +10,9 @@ class TreeNode:
 
 
 class Solution:
-    def parseListToTree(self, inputList: List[int]) -> TreeNode:
+    def parseListToTree(self, inputList: List[int]) -> TreeNode or None:
+        if not inputList:
+            return None
         root = TreeNode(inputList[0])
 
         def recur(node: TreeNode, index: int):
@@ -49,23 +51,28 @@ class Solution:
                 queue.append([line + 1, node.right])  # 将本节点的行号和右子节点入队
         print()
 
-    def isSubStructure(self, A: TreeNode, B: TreeNode) -> bool:
-        if not A or not B:
-            return False
+    def mirrorTree(self, root: TreeNode) -> TreeNode or bool:
+        if not root:
+            return None
+        root.left, root.right = self.mirrorTree(root.right), self.mirrorTree(root.left)
+        return root
 
-        def recur(A: TreeNode, B: TreeNode) -> bool:
-            if not B:
-                return True
-            if not A:
-                return True
-            return A.val == B.val and recur(A.left, B.left) and recur(A.right, B.right)
+    def mirrorTreeWithStack(self, root: TreeNode) -> TreeNode or bool:
+        stack = [root]
+        while stack:
+            temp = stack.pop()
+            if temp.left:
+                stack.append(temp.left)
+            if temp.right:
+                stack.append(temp.right)
+            temp.left, temp.right = temp.right, temp.left
+        return root
 
-        return recur(A, B) or self.isSubStructure(A.left, B) or self.isSubStructure(A.right, B)
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     test = Solution()
-    A = test.parseListToTree([1, 2, 3, 4])
-    B = test.parseListToTree([3])
-    test.print_by_layer_1(A)
-    print(test.isSubStructure(A, B))
+    inputList = [4, 2, 7, 1, 3, 6, 9]
+    startNode = test.parseListToTree(inputList)
+    test.print_by_layer_1(startNode)
+    startNode = test.mirrorTree(startNode)
+    test.print_by_layer_1(startNode)
