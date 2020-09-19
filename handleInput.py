@@ -19,19 +19,17 @@ def parseListToTree(inputList: List[int]) -> TreeNode or bool:
     root = TreeNode(inputList[0])
 
     for i in range(len(inputList)):
-        if not inputList[i]:
+        if inputList[i] is None:
             if 2 * i + 1 <= len(inputList):
                 inputList.insert(2 * i + 1, None)
             if 2 * i + 2 <= len(inputList):
                 inputList.insert(2 * i + 2, None)
 
     def recur(node: TreeNode, index: int):
-        if 2 * index + 1 < len(inputList) and inputList[2 * index + 1]:
+        if 2 * index + 1 < len(inputList) and inputList[2 * index + 1] is not None:
             node.left = TreeNode(inputList[2 * index + 1])
             recur(node.left, 2 * index + 1)
-        else:
-            return
-        if 2 * index + 2 < len(inputList) and inputList[2 * index + 2]:
+        if 2 * index + 2 < len(inputList) and inputList[2 * index + 2] is not None:
             node.right = TreeNode(inputList[2 * index + 2])
             recur(node.right, 2 * index + 2)
 
@@ -44,6 +42,7 @@ def print_by_layer_1(root):
     2. 逐行打印——初级版：
     用line/current_line 控制换行，在入队时候即加入行号信息
     """
+    print("逐行打印")
     if not root:
         return
     queue = []  #
@@ -60,3 +59,4 @@ def print_by_layer_1(root):
             queue.append([line + 1, node.left])  # 将本节点的行号和左子节点入队
         if node.right:
             queue.append([line + 1, node.right])  # 将本节点的行号和右子节点入队
+    print()
