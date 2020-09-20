@@ -8,6 +8,10 @@ class TreeNode:
         self.left = None
         self.right = None
 
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 def parseListToTree(inputList: List[int]) -> TreeNode or bool:
     """
@@ -35,6 +39,15 @@ def parseListToTree(inputList: List[int]) -> TreeNode or bool:
 
     recur(root, 0)
     return root
+
+
+def parseListToChain(list: List) -> ListNode:
+    head = ListNode(None)
+    temp = head
+    for i in list:
+        temp.next = ListNode(i)
+        temp = temp.next
+    return head.next
 
 
 def print_by_layer_1(root):
