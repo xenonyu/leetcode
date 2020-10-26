@@ -12,7 +12,7 @@ class Solution:
                     res.append(use + [n])
                 elif n < remain:
                     dfs(i, use + [n], remain - n)
-
+        candidates.sort()
         use = []
         res = []
         dfs(0, use, target)
