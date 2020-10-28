@@ -13,6 +13,7 @@ class ListNode:
         self.val = x
         self.next = None
 
+
 def parseListToTree(inputList: List[int]) -> TreeNode or bool:
     """
 
