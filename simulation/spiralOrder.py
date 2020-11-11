@@ -1,3 +1,4 @@
+from collections import Counter
 from typing import List
 
 
@@ -30,3 +31,5 @@ if __name__ == '__main__':
     inputList = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     result = test.spiralOrder(inputList)
     print(result)
+    a = Counter("123344")
+    print(len(a))
