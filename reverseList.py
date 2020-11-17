@@ -27,12 +27,20 @@ class Solution:
             cur = temp
         return pre
 
+    def reverseListII(self, head: ListNode) -> ListNode:
+        if head is None or head.next is None:
+            return head
+        p = self.reverseListII(head.next)
+        head.next.next = head
+        head.next = None
+        return p
+
 
 if __name__ == "__main__":
     test = Solution()
     inputList = [1, 2, 3, 4]
     startNode = test.parseListToListNode(inputList)
-    res = test.reverseList(startNode)
+    res = test.reverseListII(startNode)
     while res:
         print(str(res.val) + "->", end="")
         res = res.next

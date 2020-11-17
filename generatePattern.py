@@ -1,4 +1,4 @@
-pattern = [3, 2, 1, 4, 7, 5, 8, 6, 9]
+pattern = [7, 5, 2, 3]
 res = ''
 for i in pattern:
     res += str(i) + ' --> '
