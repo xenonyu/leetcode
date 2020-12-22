@@ -19,26 +19,29 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 
-def create_graph(G, node, pos={}, x=0, y=0, layer=1):
-    pos[node.val] = (x, y)
+def create_graph(G, node, pos={}, label={}, x=0, y=0, layer=1):
+    if pos is None:
+        pos = {}
+    pos[node] = (x, y)
+    label[node] = node.val
     if node.left:
-        G.add_edge(node.val, node.left.val)
+        G.add_edge(node, node.left)
         l_x, l_y = x - 1 / 2 ** layer, y - 1
         l_layer = layer + 1
         create_graph(G, node.left, x=l_x, y=l_y, pos=pos, layer=l_layer)
     if node.right:
-        G.add_edge(node.val, node.right.val)
+        G.add_edge(node, node.right)
         r_x, r_y = x + 1 / 2 ** layer, y - 1
         r_layer = layer + 1
         create_graph(G, node.right, x=r_x, y=r_y, pos=pos, layer=r_layer)
-    return (G, pos)
+    return G, pos, label
 
 
 def draw(node):  # 以某个节点为根画图
-    graph = nx.DiGraph()
-    graph, pos = create_graph(graph, node)
-    fig, ax = plt.subplots(figsize=(8, 10))  # 比例可以根据树的深度适当调节
-    nx.draw_networkx(graph, pos, ax=ax, node_size=4000)
+    G = nx.DiGraph()
+    G, pos, label = create_graph(G, node)
+    fig, ax = plt.subplots(figsize=(5, 10))  # 比例可以根据树的深度适当调节
+    nx.draw_networkx(G, pos, ax=ax, labels=label, with_labels=True, node_size=4000)
     plt.show()
 
 
@@ -102,3 +105,10 @@ def print_by_layer_1(root):
         if node.right:
             queue.append([line + 1, node.right])  # 将本节点的行号和右子节点入队
     print()
+
+
+def print_chain(head: ListNode):
+    while head:
+        print("{} --> ".format(head.val), end="")
+        head = head.next
+    print('NULL')

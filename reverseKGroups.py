@@ -51,14 +51,41 @@ class Solution:
                 cur = cur.next
                 i -= 1
 
+    def reverseKGroupII(self, head: ListNode, k: int) -> ListNode:
+        def reverseBetween(head: ListNode, tail: ListNode):
+            tailNext = tail.next
+            pre = head.next
+            cur = pre.next
+            while cur != tailNext:
+                temp = cur.next
+                cur.next = pre
+                pre = cur
+                cur = temp
+            head.next.next = tailNext
+            head.next = tail
+
+        preHead = ListNode(0)
+        preHead.next = head
+        slow = preHead
+        while True:
+            fast = slow
+            for _ in range(k):
+                if fast.next:
+                    fast = fast.next
+                else:
+                    return preHead.next
+            reverseBetween(slow, fast)
+            for _ in range(k): slow = slow.next
+
 
 if __name__ == "__main__":
-    test = Solution()
-    inputList =[1, 2, 3, 4, 5]
-    k = 2
-    startNode = test.parseListToListNode(inputList)
-    startNode = test.reverseKGroup(startNode, k)
-
-    while startNode:
-        print(str(startNode.val)+"->", end="")
-        startNode = startNode.next
+    # test = Solution()
+    # inputList =[1, 2, 3, 4, 5]
+    # k = 2
+    # startNode = test.parseListToListNode(inputList)
+    # startNode = test.reverseKGroupII(startNode, k)
+    #
+    # while startNode:
+    #     print(str(startNode.val)+"->", end="")
+    #     startNode = startNode.next
+    print('a'.lower())
