@@ -1,6 +1,6 @@
 from typing import List
 
-from handleInput import parseListToTree, print_by_layer_1
+from handleInput import deserialize, print_by_layer_1
 
 
 # Definition for a binary tree node.
@@ -46,7 +46,7 @@ class Solution:
 if __name__ == "__main__":
     inputList = [1, -2, -3, 1, 3, -2, None, -1]
     test = Solution()
-    root = parseListToTree(inputList)
+    root = deserialize(inputList)
     print_by_layer_1(root)
     res = test.pathSumII(root, 2)
     print(res)

@@ -1,4 +1,4 @@
-from handleInput import parseListToTree, print_by_layer_1
+from handleInput import deserialize, print_by_layer_1
 
 
 # Definition for a Node.
@@ -32,7 +32,7 @@ class Solution:
 
 if __name__ == '__main__':
     inputList = [4, 2, 5, 1, 3]
-    root = parseListToTree(inputList)
+    root = deserialize(inputList)
     print_by_layer_1(root)
     test = Solution()
     head = test.treeToDoublyList(root)

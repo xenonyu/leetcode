@@ -1,4 +1,4 @@
-from handleInput import TreeNode, parseListToTree, draw, print_by_layer_1
+from handleInput import TreeNode, deserialize, draw, print_by_layer_1
 
 
 class Solution:
@@ -19,7 +19,7 @@ class Solution:
 
 if __name__ == '__main__':
     inputList = [1, 3, 2, 5, 3, None, 9]
-    root = parseListToTree(inputList)
+    root = deserialize(inputList)
     draw(root)
     print_by_layer_1(root)
     test = Solution()

@@ -1,4 +1,4 @@
-from handleInput import TreeNode, parseListToTree
+from handleInput import TreeNode, deserialize
 
 
 class Solution:
@@ -21,5 +21,5 @@ class Solution:
 if __name__ == '__main__':
     test = Solution()
     inputList = [1, 2, 3, 4, 5]
-    root = parseListToTree(inputList)
+    root = deserialize(inputList)
     print(test.diameterOfBinaryTree(root))

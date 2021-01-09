@@ -1,4 +1,4 @@
-from handleInput import parseListToTree, print_by_layer_1
+from handleInput import deserialize, print_by_layer_1
 
 
 # Definition for a binary tree node.
@@ -10,11 +10,13 @@ class TreeNode:
 
 
 class Solution:
+    def __init__(self):
+        self.x, self.y, self.pre = None, None, None
+
     def recoverTree(self, root: TreeNode) -> None:
         """
         Do not return anything, modify root in-place instead.
         """
-        self.x, self.y, self.pre = None, None, None
 
         def inOrderTraverse(root: TreeNode):
             if root is None: return
@@ -31,7 +33,7 @@ class Solution:
 
 if __name__ == '__main__':
     inputList = [5, 3, 9, -2147483648, 2]
-    root = parseListToTree(inputList)
+    root = deserialize(inputList)
     # print_by_layer_1(root)
     test = Solution()
     test.recoverTree(root)

@@ -1,4 +1,4 @@
-from handleInput import TreeNode, parseListToTree
+from handleInput import TreeNode, deserialize
 
 
 class Solution:
@@ -19,6 +19,6 @@ class Solution:
 
 if __name__ == '__main__':
     inputList = [5, 3, 8, None, None, 7, 9]
-    root = parseListToTree(inputList)
+    root = deserialize(inputList)
     test = Solution()
     print(test.isValidBST(root))

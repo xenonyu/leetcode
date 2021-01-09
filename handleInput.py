@@ -20,7 +20,20 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 
-def create_graph(G, node, pos={}, label={}, x=0, y=0, layer=1):
+def create_graph(G, node, pos=None, label=None, x=0, y=0, layer=1):
+    """
+
+    :param layer:
+    :param y:
+    :param x:
+    :param pos:
+    :param node:
+    :type label: object
+    """
+    if label is None:
+        label = {}
+    if pos is None:
+        pos = {}
     if pos is None:
         pos = {}
     pos[node] = (x, y)
@@ -46,11 +59,11 @@ def draw(node):  # 以某个节点为根画图
     plt.show()
 
 
-def deserialize(inputList: List[int]) -> TreeNode or bool:
+def deserialize(inputList: List[int]):
     """
 
-    :type inputList: object
-    """
+        :type inputList: object
+        """
     # n: the index of node
     # m: the num of None before node
     # node.left: (n - m) * 2 + 1

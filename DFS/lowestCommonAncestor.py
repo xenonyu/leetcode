@@ -32,7 +32,7 @@ class Solution:
 if __name__ == '__main__':
     test = Solution()
     inputList, p, q = [-1, 0, 3, -2, 4, None, None, 8], 8, 4
-    root = handleInput.parseListToTree(inputList)
+    root = handleInput.deserialize(inputList)
     handleInput.print_by_layer_1(root)
     ans = test.lowestCommonAncestorForTree(root, p, q)
     print("answer is: ", ans.val)

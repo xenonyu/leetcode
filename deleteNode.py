@@ -1,4 +1,4 @@
-from handleInput import TreeNode, parseListToTree, draw
+from handleInput import TreeNode, deserialize, draw
 
 
 class Solution:
@@ -12,7 +12,7 @@ class Solution:
         while root.left: root = root.left
         return root.val
 
-    def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+    def deleteNode(self, root: TreeNode, key: int) -> TreeNode or None:
         if not root: return
         if root.val < key:
             root.right = self.deleteNode(root.right, key)
@@ -34,7 +34,7 @@ class Solution:
 if __name__ == '__main__':
     inputList = [2, 1]
     target = 2
-    root = parseListToTree(inputList)
+    root = deserialize(inputList)
     # print_by_layer_1(root)
     draw(root)
     test = Solution()
