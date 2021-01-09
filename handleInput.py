@@ -1,3 +1,4 @@
+import collections
 from typing import List
 
 
@@ -45,31 +46,29 @@ def draw(node):  # 以某个节点为根画图
     plt.show()
 
 
-def parseListToTree(inputList: List[int]) -> TreeNode or bool:
+def deserialize(inputList: List[int]) -> TreeNode or bool:
     """
 
     :type inputList: object
     """
-    if not inputList:
-        return None
-    root = TreeNode(inputList[0])
-
-    for i in range(len(inputList)):
-        if inputList[i] is None:
-            if 2 * i + 1 <= len(inputList):
-                inputList.insert(2 * i + 1, None)
-            if 2 * i + 2 <= len(inputList):
-                inputList.insert(2 * i + 2, None)
-
-    def recur(node: TreeNode, index: int):
-        if 2 * index + 1 < len(inputList) and inputList[2 * index + 1] is not None:
-            node.left = TreeNode(inputList[2 * index + 1])
-            recur(node.left, 2 * index + 1)
-        if 2 * index + 2 < len(inputList) and inputList[2 * index + 2] is not None:
-            node.right = TreeNode(inputList[2 * index + 2])
-            recur(node.right, 2 * index + 2)
-
-    recur(root, 0)
+    # n: the index of node
+    # m: the num of None before node
+    # node.left: (n - m) * 2 + 1
+    # node.right: (n - m) * 2 + 2
+    if not inputList: return None
+    l = len(inputList)
+    root, i = TreeNode(inputList[0]), 1
+    queue = collections.deque([root])
+    while queue:
+        node = queue.popleft()
+        if i < l and inputList[i]:
+            node.left = TreeNode(inputList[i])
+            queue.append(node.left)
+        i += 1
+        if i < l and inputList[i]:
+            node.right = TreeNode(inputList[i])
+            queue.append(node.right)
+        i += 1
     return root
 
 

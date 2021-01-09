@@ -1,4 +1,4 @@
-from handleInput import TreeNode, List, parseListToTree, draw
+from handleInput import TreeNode, List, deserialize, draw
 
 
 class Solution:
@@ -37,7 +37,7 @@ class Solution:
 
 if __name__ == '__main__':
     inputList = [0, 2, 1, None, None, 3]
-    root = parseListToTree(inputList)
+    root = deserialize(inputList)
     draw(root)
     test = Solution()
     print(test.distanceK(root, target=root.right.left, K=3))
